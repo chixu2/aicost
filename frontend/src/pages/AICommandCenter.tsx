@@ -107,13 +107,13 @@ function renderToolResultSmart(raw: string): React.ReactNode {
           {success
             ? <CheckCircleOutlined style={{ color: "#52c41a" }} />
             : <CloseCircleOutlined style={{ color: "#ff4d4f" }} />}
-          <Tag color={success ? "green" : "red"}>{AGENT_LABELS[String(obj.agent)] || obj.agent}</Tag>
+          <Tag color={success ? "green" : "red"}>{String(AGENT_LABELS[String(obj.agent)] || obj.agent)}</Tag>
           {obj.tool_calls_made != null && (
             <span style={{ color: "#94a3b8", fontSize: 12 }}>{String(obj.tool_calls_made)} 次调用</span>
           )}
         </div>
         <div className="orch-result-answer">{String(obj.answer)}</div>
-        {obj.error && <div style={{ color: "#ff4d4f", fontSize: 12, marginTop: 4 }}>错误: {String(obj.error)}</div>}
+        {obj.error && <div style={{ color: "#ff4d4f", fontSize: 12, marginTop: 4 }}>错误: {String(obj.error as string)}</div>}
       </div>
     );
   }
