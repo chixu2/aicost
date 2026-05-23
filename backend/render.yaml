@@ -1,0 +1,24 @@
+services:
+  - type: web
+    name: aicost-backend
+    runtime: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.12.0
+      - key: DATABASE_URL
+        fromDatabase:
+          name: aicost-db
+          property: connectionString
+      - key: AI_PROVIDER
+        value: disabled
+      - key: EMBEDDING_BACKEND
+        value: hash
+
+databases:
+  - name: aicost-db
+    plan: free
+    databaseName: aicost
+    user: aicost
